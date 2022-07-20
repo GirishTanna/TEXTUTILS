@@ -9,6 +9,12 @@ export default function TextForm(props) {
     const onCLickHandler  = (e)=> e.target.id=="upper" ? setText(text.toUpperCase()) :  setText(text.toLowerCase());
     const clearText       = (e)=> setText('');
     const [text, setText] = useState('');
+    const copyText        = (e) =>{
+      const text = document.querySelector('#mybox');
+      text.select();
+      navigator.clipboard.writeText(text.value);
+    }
+    
     // const isEmailPresent  = (e) =>{
     //   let validRegex = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
     //   if(text==''){
@@ -27,11 +33,11 @@ export default function TextForm(props) {
  
   <div className="container">
     <h1>{props.heading}</h1>
-    <textarea className="form-control my-3" id="exampleFormControlTextarea1" value={text} onChange={handleOnChange} rows="3"></textarea>
+    <textarea className="form-control my-3" id="mybox" value={text} onChange={handleOnChange} rows="3"></textarea>
     <button className='btn btn-primary my-3' onClick={onCLickHandler} id="upper">convert to UPPERCASE</button>
     <button className='btn btn-primary mx-3' onClick={onCLickHandler} id="lower">convert to lowercase</button>
     <button className='btn btn-primary ml-2' onClick={clearText} id="lower">clear text</button>
-    {/* <button className='btn btn-primary mx-2' onClick={isEmailPresent} >find email</button> */}
+    <button className='btn btn-primary mx-2'onClick={copyText} >Copy Text</button>
   </div>
   <div className='container my-2'>
     <h1>Your text summary:</h1>
