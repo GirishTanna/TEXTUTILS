@@ -1,59 +1,66 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types'
+import React, {useState} from 'react'
 
 
 export default function TextForm(props) {
-    const handleOnChange = (evt)=>{
-       setText(evt.target.value)
+    const handleUpClick = ()=>{
+        // console.log("Uppercase was clicked: " +  text);
+        let newText = text.toUpperCase();
+        setText(newText)
     }
-    const onCLickHandler  = (e)=> e.target.id=="upper" ? setText(text.toUpperCase()) :  setText(text.toLowerCase());
-    const clearText       = (e)=> setText('');
-    const [text, setText] = useState('');
-    const copyText        = (e) =>{
-      const text = document.querySelector('#mybox');
-      text.select();
-      navigator.clipboard.writeText(text.value);
+
+    const handleLoClick = ()=>{ 
+        let newText = text.toLowerCase();
+        setText(newText)
     }
-    
-    // const isEmailPresent  = (e) =>{
-    //   let validRegex = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
-    //   if(text==''){
-    //     console.log("no text")
-    //   }else{
-    //     let letters = text.split(' ');
-    //     for(let letter in letters){
-    //       if(letter.match(validRegex))
-    //          console.log("hello")
-        
-    //       }
-    //   }
-    // }
-  return (
-   <>
- 
-  <div className="container">
-    <h1>{props.heading}</h1>
-    <textarea className="form-control my-3" id="mybox" value={text} onChange={handleOnChange} rows="3"></textarea>
-    <button className='btn btn-primary my-3' onClick={onCLickHandler} id="upper">convert to UPPERCASE</button>
-    <button className='btn btn-primary mx-3' onClick={onCLickHandler} id="lower">convert to lowercase</button>
-    <button className='btn btn-primary ml-2' onClick={clearText} id="lower">clear text</button>
-    <button className='btn btn-primary mx-2'onClick={copyText} >Copy Text</button>
-  </div>
-  <div className='container my-2'>
-    <h1>Your text summary:</h1>
-    <p>{text.split(' ').length} words and {text.length} characters</p>
-    <p>{0.008 * text.split(' ').length} minutes to read</p>
-    <h2>Preview</h2>
-    <p>{text}</p>
-  </div>  
 
+    const handleClearClick = ()=>{ 
+        let newText = '';
+        setText(newText)
+    }
 
+    const handleOnChange = (event)=>{
+        // console.log("On change");
+        setText(event.target.value)
+    }
 
+    // Credits: A
+    const handleCopy = () => {
+        console.log("I am copy");
+        var text = document.getElementById("myBox");
+        text.select();
+        text.setSelectionRange(0, 9999);
+        navigator.clipboard.writeText(text.value);
+    }
 
-   </>
-  )
+    // Credits: Coding Wala
+    const handleExtraSpaces = () => {
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "))
+    }
+
+    const [text, setText] = useState(''); 
+    // text = "new text"; // Wrong way to change the state
+    // setText("new text"); // Correct way to change the state
+    return (
+        <>
+        <div className="container" style={{color: props.mode==='dark'?'white':'#042743'}}> 
+            <h1>{props.heading}</h1>
+            <div className="mb-3"> 
+            <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode==='dark'?'grey':'white', color: props.mode==='dark'?'white':'#042743'}} id="myBox" rows="8"></textarea>
+            </div>
+            <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
+            <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
+            <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear Text</button>
+            <button className="btn btn-primary mx-1" onClick={handleCopy}>Copy Text</button>
+            <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+        </div>
+        <div className="container my-3" style={{color: props.mode==='dark'?'white':'#042743'}}>
+            <h2>Your text summary</h2>
+            <p>{text.split(" ").length} words and {text.length} characters</p>
+            <p>{0.008 *  text.split(" ").length} Minutes read</p>
+            <h2>Preview</h2>
+            <p>{text.length>0?text:"Enter something in the textbox above to preview it here"}</p>
+        </div>
+        </>
+    )
 }
-TextForm.defaultProps = {
-    heading  : "enter heading please"
-}
-
