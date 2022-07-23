@@ -4,13 +4,13 @@ import TextForm from './components/TextForm';
 import About from './components/About';
 import React, { useState } from 'react';
 import Alert from './components/Alert';
-import { Routes } from 'react-router-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+// import { Routes } from 'react-router-dom';
+// import {
+//   BrowserRouter as Router,
+//   Switch,
+//   Route,
+//   Link
+// } from "react-router-dom";
 
  
 function App() {
@@ -51,23 +51,23 @@ function App() {
     <>
     {/* <Navbar title="TextUtils" aboutText="About TextUtils" /> */}
     {/* <Navbar/> */}
-    <Router>
+    {/* <Router> */}
       
 
       <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode}/>
       <Alert alert={alert}/>
       <div className="container my-3">
-               
-      <Routes>
+      <TextForm />
+      {/* <Routes>
         <Route path="/" element={<TextForm />} />
         <Route path="/about" element={<About />} />
-      </Routes>
+      </Routes> */}
 
 
       </div>
 
 
-      </Router>
+      {/* </Router> */}
     </> 
   );
 }
