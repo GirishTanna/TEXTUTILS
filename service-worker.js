@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/GirishTanna/TEXTUTILS/precache-manifest.94731dadd85c1a71742c3bd125e1ced5.js"
+  "/TEXTUTILS/precache-manifest.9dd2b3bcde99d2c7e09a24e1c647c912.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/GirishTanna/TEXTUTILS/index.html", {
+workbox.routing.registerNavigationRoute("/TEXTUTILS/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
